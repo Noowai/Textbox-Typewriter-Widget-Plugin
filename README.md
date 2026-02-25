@@ -13,8 +13,8 @@ To add plugin to your project:
 
 **Using the widget**
 
-To add typewriter widget to your menu layout, find 'Typewriter Textbox', add it to your laout.
-When selected, In details panel you'll find 'Typewriter' section with basic setup.
+To add typewriter widget to your menu layout. Find 'Typewriter Textbox' in Palet tab, where all other widget elements are available, add it to your laout.
+When selected, in details panel you'll find 'Typewriter' section with basic setup.
 
 Here you can specify:
 - Speed - how many letters should appear per second
@@ -28,7 +28,7 @@ Here you can specify:
 
 **Additionnal Capabilities**
 
-Widget has several specific functions to use:
+Typewriter Widget has several specific functions to use:
 - StartTypewriting - this function is for begin typewriting effect mannually when Autostart is off
 - SkipTypewriting - will instanlty output the whole text
 - SwitchSpeedUp - rurns the Speed Up Coeff on and off during typewriting.
