@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/TextBlock.h"
-#include "TextboxTypewriter.generated.h"
+#include "Components/RichTextBlock.h"
+#include "RichTextTypewriter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class UTextBoxTypewriter : public UTextBlock
+class URichTextTypewriter : public URichTextBlock
 {
 	GENERATED_BODY()
 	
@@ -49,7 +49,11 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTypingComplete);
 
 	// If autostart is off, use StartTypewriting()
 	UPROPERTY(EditAnywhere, Category = "Typewriter", AdvancedDisplay)
-	bool bAutoStart = true;
+	bool bAutoStart = true;	
+
+	// Don't typewrite, just show text
+	UPROPERTY(EditAnywhere, Category = "Typewriter", AdvancedDisplay)
+	bool bShowFullText = false;
 
 #pragma endregion
 
@@ -64,9 +68,12 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnTypingComplete);
 	
 	UFUNCTION(BlueprintCallable, Category = "Typewriter")
 	void SkipTypewriting();
+	
+	UFUNCTION(BlueprintCallable, Category = "Typewriter")
+	void SetShowFullText(bool bShow);
 
 #pragma region Overrides
-	virtual void SetText(FText InText) override;
+	virtual void SetText(const FText& InText) override;
 	virtual void SynchronizeProperties() override;
 	
 #pragma endregion 
@@ -76,7 +83,9 @@ private:
 	void AddLetter();
 
 	void FinishTyping();
-	void UpdateText(FText InText);
+	void UpdateText(const FText& InText);
+
+	bool DetectStyleTag(const FChar& Letter);
 
 	bool bIsSpedUp = false;
 	bool bWasPaused = false;
@@ -85,4 +94,5 @@ private:
 	FString SourceString;
 	FString CurrentString = "";
 	int32 LetterPointer = 0;
+	bool bHasStyle = false;
 };
